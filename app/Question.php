@@ -9,13 +9,20 @@ class Question extends Model
     // 这里也放开了属性保护
     protected $guarded = ['id'];
 
+    public function answers()
+    {
+        return $this->hasMany(Answer::class);
+    }
+
     public function scopePublished($query)
     {
         return $query->whereNotNull('published_at');
     }
 
-    public function answers()
+    public function markAsBestAnswer($answer)
     {
-        return $this->hasMany(Answer::class);
+        $this->update([
+            'best_answer_id' => $answer->id
+        ]);
     }
 }
