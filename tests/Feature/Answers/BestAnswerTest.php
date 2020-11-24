@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Answers;
 
 use App\Answer;
 use App\Question;
@@ -10,7 +10,7 @@ use Tests\TestCase;
 
 class BestAnswerTest extends TestCase
 {
-    use  RefreshDatabase;
+    use RefreshDatabase;
 
     /** @test */
     public function guests_can_not_mark_best_answer()
