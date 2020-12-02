@@ -11,6 +11,11 @@ class Answer extends Model
 
     protected $guarded = ['id'];
 
+    protected $appends = [
+        'upVotesCount',
+        'downVotesCount',
+    ];
+
     public function question()
     {
         return $this->belongsTo(Question::class);
