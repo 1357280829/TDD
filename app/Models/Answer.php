@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Answer extends Model
 {
@@ -68,5 +69,19 @@ class Answer extends Model
     public function cancelVoteDown($user)
     {
         $this->votes('vote_down')->where(['user_id' => $user->id, 'type' => 'vote_down'])->delete();
+    }
+
+    public function isVotedDown($user)
+    {
+        if (! $user) {
+            return false;
+        }
+
+        return (bool)$this->votes('vote_down')->where('user_id', $user->id)->count();
+    }
+
+    public function getDownVotesCountAttribute()
+    {
+        return $this->votes('vote_down')->count();
     }
 }
